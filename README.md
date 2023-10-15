@@ -3,6 +3,8 @@
 # service-registry-app
 This service is an Eureka server where other services will register and discover themselves for communication
 
+
+
 # sci-service
 SCI stands for Service Connector Interface which is a cloud api-gateway which will parse every request going to order and product service.
 This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
