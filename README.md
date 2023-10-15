@@ -1,7 +1,8 @@
 # ecommerce-app
 
 # service-registry-app
-This service is an Eureka server where other services will register and discover themselves for communication
+This service is an Eureka server where other services will register and discover themselves for communication.
+
 ![eureka-server](https://github.com/SachinMittal101/ecommerce-app/blob/main/images/eureka-server.png)
 
 # sci-service
