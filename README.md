@@ -14,10 +14,22 @@ auth-service will be used to register user in database. It also allows creation 
 only.It also exposes one endpoint which will be used to validate token.
 This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 
+Service Endpoints:
+localhost:8080/auth/register
+localhost:8080/auth/token
+localhost:8080/auth/validate
+
 # order-service
 The Order Service is responsible for managing order operations. This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 It also interacts with Product service via Eureka to fetch product details.
+Service Endpoints:
+
+localhost:8080/order/add
+localhost:8080/order/
 
 # product-service
 The Product Service is responsible for managing order operations.This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 
+Service Endpoints:
+localhost:8080/product/add
+localhost:8080/product/
