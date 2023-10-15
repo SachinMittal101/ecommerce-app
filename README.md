@@ -15,17 +15,17 @@ only.It also exposes one endpoint which will be used to validate token.
 This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 
 Service Endpoints:
-[register user](localhost:8080/auth/register)
-[create token](localhost:8080/auth/token)
-[validate token](localhost:8080/auth/validate)
+`localhost:8080/auth/register`
+`localhost:8080/auth/token`
+`localhost:8080/auth/validate`
 
 # order-service
 The Order Service is responsible for managing order operations. This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 It also interacts with Product service via Eureka to fetch product details.
 
 Service Endpoints:
-[create order](localhost:8080/order/add)
-[get order](localhost:8080/order/)
+`localhost:8080/order/add`
+`localhost:8080/order/`
 
 # product-service
 The Product Service is responsible for managing order operations.This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
