@@ -36,37 +36,45 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String createProduct(@RequestBody Product product,
-                                @RequestHeader("x-username") String username) {
-        product.setCreatedBy(username);
-        Product savedProduct = productService.saveProduct(product);
-        return "Product saved successfully";
+    public ResponseEntity<String> createProduct(@RequestBody Product product,
+                                                @RequestHeader("x-username") String username) {
+        if ("admin".equalsIgnoreCase(username)) {
+            product.setCreatedBy(username);
+            Product savedProduct = productService.saveProduct(product);
+            return ResponseEntity.ok().body("Product saved successfully");
+        } else {
+            return ResponseEntity.status(403).build();
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable Long id,
                                                 @RequestBody Product product,
                                                 @RequestHeader("x-username") String username) {
-        Product existingProduct = productService.getProductById(id);
-        if (existingProduct == null) {
-            return ResponseEntity.notFound().build();
-        }
+        if ("admin".equalsIgnoreCase(username)) {
+            Product existingProduct = productService.getProductById(id);
+            if (existingProduct == null) {
+                return ResponseEntity.notFound().build();
+            }
 
-        // Check the version of the existing product
-        if (product.getVersion() != existingProduct.getVersion()) {
-            // Handling optimistic locking conflict
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
-        }
+            // Check the version of the existing product
+            if (product.getVersion() != existingProduct.getVersion()) {
+                // Handling optimistic locking conflict
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
+            }
 
-        existingProduct.setName(product.getName());
-        existingProduct.setBrand(product.getBrand());
-        existingProduct.setCreatedBy(username);
+            existingProduct.setName(product.getName());
+            existingProduct.setBrand(product.getBrand());
+            existingProduct.setCreatedBy(username);
 
-        try {
-            Product updatedProduct = productService.updateProduct(existingProduct);
-            return ResponseEntity.ok("resource added successfully");
-        } catch (OptimisticLockingFailureException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
+            try {
+                Product updatedProduct = productService.updateProduct(existingProduct);
+                return ResponseEntity.ok("resource added successfully");
+            } catch (OptimisticLockingFailureException e) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
+            }
+        } else {
+            return ResponseEntity.status(403).build();
         }
     }
 }
