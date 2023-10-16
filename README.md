@@ -5,7 +5,7 @@ This service is an Eureka server where other services will register and discover
 
 ![eureka-server](https://github.com/SachinMittal101/ecommerce-app/blob/main/images/eureka-server.png)
 
-# sci-gateway
+# sci-service
 SCI stands for Service Connector Interface which is a cloud api-gateway which will parse every request going to order and product service.
 This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 
