@@ -61,7 +61,6 @@ public class ProductController {
             Product updatedProduct = productService.updateProduct(existingProduct);
             return ResponseEntity.ok("resource added successfully");
         } catch (OptimisticLockingFailureException e) {
-            // Handle the optimistic locking exception as needed
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
         }
     }
