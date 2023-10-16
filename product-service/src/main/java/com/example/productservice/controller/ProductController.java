@@ -52,7 +52,12 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
 
-        existingProduct.setId(id);
+        // Check the version of the existing product
+        if (product.getVersion() != existingProduct.getVersion()) {
+            // Handling optimistic locking conflict
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
+        }
+
         existingProduct.setName(product.getName());
         existingProduct.setBrand(product.getBrand());
         existingProduct.setCreatedBy(username);
@@ -61,7 +66,6 @@ public class ProductController {
             Product updatedProduct = productService.updateProduct(existingProduct);
             return ResponseEntity.ok("resource added successfully");
         } catch (OptimisticLockingFailureException e) {
-            // Handle the optimistic locking exception as needed
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Optimistic locking conflict");
         }
     }

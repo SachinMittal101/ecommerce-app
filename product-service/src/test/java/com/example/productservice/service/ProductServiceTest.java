@@ -75,10 +75,10 @@ public class ProductServiceTest {
     public void testGetAllProductsByUserName() {
         String username = "test-user";
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(1L, "test-product", "test-brand", "test-user", 1L));
+        productList.add(new Product(1L, "test-product", "test-brand", "test-user", 1));
         // Mock products with the specified username
         List<Product> productsWithUsername = new ArrayList<>();
-        productsWithUsername.add(new Product(1L, "test-product", "test-brand", "test-user", 1L));
+        productsWithUsername.add(new Product(1L, "test-product", "test-brand", "test-user", 1));
         Mockito.when(productRepository.findAll()).thenReturn(productList);
 
         List<Product> retrievedProducts = productService.getAllProductsByUserName(username);
@@ -92,10 +92,10 @@ public class ProductServiceTest {
         String username = "test-user";
         String productName = "test-product";
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(1L, "test-product", "test-brand", "test-user", 1L));
+        productList.add(new Product(1L, "test-product", "test-brand", "test-user", 1));
         // Mock products with the specified username and product name
         List<Product> productsWithUsernameAndProductName = new ArrayList<>();
-        productsWithUsernameAndProductName.add(new Product(1L, "test-product", "test-brand", "test-user", 1L));
+        productsWithUsernameAndProductName.add(new Product(1L, "test-product", "test-brand", "test-user", 1));
         Mockito.when(productRepository.findAll()).thenReturn(productList);
 
         List<Product> retrievedProducts = productService.getAllProductsByUserNameAndProductName(username, productName);
