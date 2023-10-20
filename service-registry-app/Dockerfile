@@ -1,13 +1,14 @@
-# Use an official OpenJDK 17 runtime as a parent image
+# base image
 FROM openjdk:17-oracle
 
-# Set the working directory to /app
+# Set the build argument for the JAR version (default to 0.0.1-SNAPSHOT)
+ARG JAR_VERSION=0.0.1-SNAPSHOT
 WORKDIR /app
 
 # Copy the JAR file into the container at /app
-COPY target/service-registry-app-0.0.1-SNAPSHOT.jar /app/service-registry-app.jar
+COPY target/service-registry-app-${JAR_VERSION}.jar service-registry-app.jar
 
-# Make port 8080 available to the world outside this container
+# PORT
 EXPOSE 8761
 
 # Define the command to run your application
