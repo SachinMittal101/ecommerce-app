@@ -31,5 +31,5 @@ Service Endpoints:
 The Product Service is responsible for managing order operations.This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
 
 Service Endpoints:
-`localhost:8080/product/add`
-`localhost:8080/product/`
+Create Product Endpoint: `localhost:8080/product/`
+Get Products: `localhost:8080/product/`

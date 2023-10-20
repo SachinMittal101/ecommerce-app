@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/product/")
 public class ProductController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class ProductController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<String> getProducts(@RequestHeader("x-username") String username) throws JsonProcessingException {
         List<Product> products = productService.getAllProductsByUserName(username);
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(products));
@@ -35,7 +35,7 @@ public class ProductController {
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(products));
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody Product product,
                                                 @RequestHeader("x-username") String username) {
         if ("admin".equalsIgnoreCase(username)) {
