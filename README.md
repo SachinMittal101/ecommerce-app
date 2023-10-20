@@ -24,8 +24,8 @@ The Order Service is responsible for managing order operations. This service act
 It also interacts with Product service via Eureka to fetch product details.
 
 Service Endpoints:
-`localhost:8080/order/add`
-`localhost:8080/order/`
+Create order endpoint: `localhost:8080/order/`
+Get order endpoint: `localhost:8080/order/`
 
 # product-service
 The Product Service is responsible for managing order operations.This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).

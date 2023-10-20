@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/order/")
 public class OrderController {
 
     @Autowired
@@ -18,12 +18,12 @@ public class OrderController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<String> getOrders(@RequestHeader("x-username") String username) throws JsonProcessingException {
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(service.getOrdersByUserName(username)));
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<String> createOrder(@RequestBody Order orderRequest,
                                               @RequestHeader("x-username") String username) throws JsonProcessingException {
         try {
