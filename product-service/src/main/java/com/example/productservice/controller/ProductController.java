@@ -24,7 +24,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<String> getProducts(@RequestHeader("x-username") String username) throws JsonProcessingException {
-        List<Product> products = productService.getAllProductsByUserName(username);
+        List<Product> products = productService.getAllProducts(username);
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(products));
     }
 

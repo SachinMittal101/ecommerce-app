@@ -81,7 +81,7 @@ public class ProductServiceTest {
         productsWithUsername.add(new Product(1L, "test-product", "test-brand", "test-user", 1));
         Mockito.when(productRepository.findAll()).thenReturn(productList);
 
-        List<Product> retrievedProducts = productService.getAllProductsByUserName(username);
+        List<Product> retrievedProducts = productService.getAllProducts(username);
 
         // Assert that the retrieved products match the mocked products with the specified username
         Assertions.assertEquals(productsWithUsername, retrievedProducts);

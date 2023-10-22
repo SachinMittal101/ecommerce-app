@@ -33,20 +33,17 @@ public class ProductService {
         return productRepository.getReferenceById(id);
     }
 
-    public List<Product> getAllProductsByUserName(final String username) {
-        List<Product> products = productRepository.findAll();
-        List<Product> productsByUserName = products.stream().filter(product ->
-                product.getCreatedBy().equalsIgnoreCase(username)).collect(Collectors.toList());
-        return productsByUserName;
+    public List<Product> getAllProducts(final String username) {
+        return productRepository.findAll();
     }
 
     public List<Product> getAllProductsByUserNameAndProductName(final String username,
                                                                 final String name) {
         List<Product> products = productRepository.findAll();
-        List<Product> productsByUserName = products.stream().filter(product ->
-                product.getCreatedBy().equalsIgnoreCase(username) && product.getName().equalsIgnoreCase(name))
+        List<Product> productsByUserName = products.stream().filter(product -> product.getName().equalsIgnoreCase(name))
                 .collect(Collectors.toList());
         return productsByUserName;
     }
+
 }
 
