@@ -28,6 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
             Payment savedPayment = paymentRepository.save(payment);
             log.info("eventName=processPayment,successfully saved payment details in db");
             return PaymentStatusResponseDto.builder().orderNumber(savedPayment.getOrderNumber())
+                    .paymentId(savedPayment.getId())
                     .paymentStatus(savedPayment.getPaymentStatus())
                     .paymentAmount(savedPayment.getPaymentAmount())
                     .createdBy(savedPayment.getCreatedBy())

@@ -29,7 +29,7 @@ public class PaymentServiceClient {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @CircuitBreaker(name = "paymentService", fallbackMethod = "fallback")
+    @CircuitBreaker(name = "paymentService", fallbackMethod = "paymentServiceFallback")
     public PaymentStatusResponseDto processPayment(final String orderNumber,
                                      final double paymentAmount,
                                      final String paymentMethod,
@@ -50,7 +50,7 @@ public class PaymentServiceClient {
         return paymentStatusResponseDto;
     }
 
-    public PaymentStatusResponseDto fallback(Exception e) {
+    public PaymentStatusResponseDto paymentServiceFallback(Exception e) {
         log.error("Payment service is unavailable. Returning a default response.");
         return PaymentStatusResponseDto.builder().build();
     }

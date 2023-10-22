@@ -13,7 +13,7 @@ public class PaymentAction {
         PAYMENT_METHOD_MAP.put(PaymentMethod.DEBIT_CARD, new DebitCardPaymentAction());
         PAYMENT_METHOD_MAP.put(PaymentMethod.CREDIT_CARD, new CreditCardPaymentAction());
         PAYMENT_METHOD_MAP.put(PaymentMethod.UPI, new UpiPaymentAction());
-        PAYMENT_METHOD_MAP.put(PaymentMethod.CASH, new DebitCardPaymentAction());
+        PAYMENT_METHOD_MAP.put(PaymentMethod.CASH, new CashPaymentAction());
     }
 
     public boolean executeAction(final PaymentDto paymentDto) {

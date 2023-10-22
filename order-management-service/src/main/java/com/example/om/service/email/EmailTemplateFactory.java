@@ -10,6 +10,7 @@ public class EmailTemplateFactory {
             case SHIPPED -> new OrderShippedEmailTemplate();
             case DELIVERED -> new OrderDeliveredEmailTemplate();
             case CANCELED -> new OrderCanceledEmailTemplate();
+            case FAILED -> new OrderFailedEmailTemplate();
             default -> throw new IllegalArgumentException("Unsupported order status");
         };
     }

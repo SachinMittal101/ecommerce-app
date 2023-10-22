@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,25 +49,33 @@ public class OrderService {
         order.setCreatedBy(username);
         double orderAmount = order.getOrderAmount();
         String paymentMethod = order.getPaymentMethod();
-        getPaymentDetailResponse(username, order, orderAmount, paymentMethod);
-        order.setOrderAmount(orderAmount);
-        order.setPaymentMethod(paymentMethod);
-        order.setOrderStatus(OrderStatus.CREATED);
-        return getSavedOrder(order);
+        PaymentStatusResponseDto paymentDetailResponse = getPaymentDetailResponse(username, order, orderAmount, paymentMethod);
+        if (Objects.isNull(paymentDetailResponse)) {
+            order.setOrderAmount(orderAmount);
+            order.setPaymentMethod(paymentMethod);
+            order.setOrderStatus(OrderStatus.FAILED);
+            return saveOrder(order);
+        } else {
+            order.setOrderAmount(orderAmount);
+            order.setPaymentMethod(paymentMethod);
+            order.setOrderStatus(OrderStatus.CREATED);
+            return saveOrder(order);
+        }
     }
 
-    private Order getSavedOrder(final Order order) {
+    private Order saveOrder(final Order order) {
         log.info("eventName=createOrder,trying to create order in db");
         Order savedOrder = orderRepository.save(order);
-        System.out.println("Order saved successfully");
+        log.info("Order saved successfully");
         return savedOrder;
     }
 
-    private void getPaymentDetailResponse(String username, Order order, double orderAmount, String paymentMethod) throws JsonProcessingException {
+    private PaymentStatusResponseDto getPaymentDetailResponse(String username, Order order, double orderAmount, String paymentMethod) throws JsonProcessingException {
         PaymentStatusResponseDto paymentStatusResponseDto = paymentServiceClient.processPayment(order.getOrderNumber(), orderAmount, paymentMethod,
                 username);
         order.setPaymentStatus(paymentStatusResponseDto.getPaymentStatus());
         order.setPaymentTime(paymentStatusResponseDto.getPaymentTime());
+        return null;
     }
 
     private ProductDto getProductDetailResponse(String username, Order order) throws JsonProcessingException {
