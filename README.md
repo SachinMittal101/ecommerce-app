@@ -33,3 +33,9 @@ The Product Service is responsible for managing order operations.This service ac
 Service Endpoints:
 Create Product Endpoint: `localhost:8080/product/`
 Get Products: `localhost:8080/product/`
+
+# payment-service
+The Payment Service is responsible for processing payment of an.This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
+
+Service Endpoints:
+Create Product Endpoint: `localhost:8080/payment/process`
