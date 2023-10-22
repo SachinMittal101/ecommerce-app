@@ -21,7 +21,7 @@ Service Endpoints:
 
 # order-service
 The Order Service is responsible for managing order operations. This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
-It also interacts with Product service via Eureka to fetch product details.
+It also interacts with Product service and Payment service via Eureka to fetch product and payemnt details respectively. An EmailTemplate stub is also exposed in this service for sending email to the consumer once order is created.
 
 Service Endpoints:
 Create order endpoint: `localhost:8080/order/`
@@ -33,3 +33,9 @@ The Product Service is responsible for managing order operations.This service ac
 Service Endpoints:
 Create Product Endpoint: `localhost:8080/product/`
 Get Products: `localhost:8080/product/`
+
+# payment-service
+The Payment Service is responsible for processing payment of an.This service acts as a Eureka client and is registered on the Service Registry App (Eureka Server).
+
+Service Endpoints:
+Create Product Endpoint: `localhost:8080/payment/process`
