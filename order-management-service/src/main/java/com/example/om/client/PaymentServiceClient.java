@@ -6,6 +6,7 @@ import com.example.om.dto.ProductDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -28,6 +29,7 @@ public class PaymentServiceClient {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @CircuitBreaker(name = "paymentService", fallbackMethod = "fallback")
     public PaymentStatusResponseDto processPayment(final String orderNumber,
                                      final double paymentAmount,
                                      final String paymentMethod,
@@ -46,5 +48,10 @@ public class PaymentServiceClient {
                 PaymentStatusResponseDto.class);
         log.info("paymentStatusResponseDto={}", paymentStatusResponseDto);
         return paymentStatusResponseDto;
+    }
+
+    public PaymentStatusResponseDto fallback(Exception e) {
+        log.error("Payment service is unavailable. Returning a default response.");
+        return PaymentStatusResponseDto.builder().build();
     }
 }
